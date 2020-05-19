@@ -56,6 +56,10 @@ namespace libtorrent {
 	// returns the number of nodes in the tree, given the number of leaves
 	TORRENT_EXTRA_EXPORT int merkle_num_nodes(int);
 
+	// given the number of leafs in the tree, returns the index to the first
+	// leaf
+	TORRENT_EXTRA_EXPORT int merkle_first_leaf(int num_leafs);
+
 	// takes the number of leaves and returns the height of the merkle tree.
 	// does not include the root node in the layer count. i.e. if there's only a
 	// root hash, there are 0 layers. Note that the number of leaves must be
@@ -118,6 +122,9 @@ namespace libtorrent {
 	TORRENT_EXTRA_EXPORT
 	void merkle_validate_copy(span<sha256_hash const> src, span<sha256_hash> dst
 		, sha256_hash const& root);
+
+	TORRENT_EXTRA_EXPORT
+	bool merkle_validate_single_layer(span<sha256_hash const> tree);
 }
 
 #endif
